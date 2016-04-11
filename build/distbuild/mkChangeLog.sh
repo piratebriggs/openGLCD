@@ -7,7 +7,7 @@ git for-each-ref --sort='*authordate' --format='%(tag)' refs/tags |tac |grep -v 
     if [ $NEXT ];then
         echo [$NEXT]
     else
-        echo "[Current]"
+        echo "[`git describe --dirty`]"
     fi
     GIT_PAGER=cat git log --no-merges --format=" * %s" $TAG..$NEXT
     NEXT=$TAG
