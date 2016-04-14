@@ -78,7 +78,7 @@
 /*
  * define name for panel configuration
  */
-#define glcd_ConfigName "vk5121-Manual"
+#define glcd_ConfigName "mtb368-Manual"
 
 /*********************************************************/
 /*  Configuration for LCD panel specific configuration   */
