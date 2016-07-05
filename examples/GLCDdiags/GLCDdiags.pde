@@ -56,6 +56,7 @@
 #include <openGLCD.h>
 #include "include/glcd_io.h" // normal sketches don't need this.
 #include "include/glcd_errno.h"
+#include "include/glcd_delay.h" // normal sketches don't need this.
 
 /*
  * Nasty kludges for @#@#@ AVR progmem CRAP
@@ -402,7 +403,7 @@ int status;
       GLCD.print("Diag Loop:");
       GLCD.println(lcount);
       GLCD.print(lcount - lfcount);
-      GLCD.print(" PASSED");
+      GLCD.print(" PASSED ");
       GLCD.print(lfcount);
       GLCD.println(" FAILED");
 
@@ -1008,6 +1009,7 @@ showGLCDconfig(void)
 //  SerialPrintf("Delays: tDDR:%d tAS:%d tDSW:%d tWH:%d tWL: %d\n",
 //  GLCD_tDDR, GLCD_tAS, GLCD_tDSW, GLCD_tWH, GLCD_tWL);
 
+#ifdef _delayNanoseconds
   SerialPrintQ("Delays: tDDR:");
   Serial.print(GLCD_tDDR);
   SerialPrintQ(" tAS:");
@@ -1018,6 +1020,9 @@ showGLCDconfig(void)
   Serial.print(GLCD_tWH);
   SerialPrintQ(" tWL:");
   Serial.println(GLCD_tWL);
+#else
+  SerialPrintQ("Delays: Using Arduino compatible delay functions\n");
+#endif
 
 
 #ifdef glcd_CHIP0
