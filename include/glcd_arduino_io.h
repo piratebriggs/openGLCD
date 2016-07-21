@@ -81,7 +81,8 @@ extern "C" {
 #define GLCD_CORE_TEENSY2pp
 #elif defined(__AVR_ATmega32U4__)   // Teensy 2.0
 #define GLCD_CORE_TEENSY2
-#elif defined(__MK20DX128__) || defined(__MK20DX256__) || defined(__MKL26Z64__) // Teensy 3/3.1/LC
+#elif defined(__MK20DX128__) || defined(__MK20DX256__) || defined(__MKL26Z64__) || defined(__MK64FX512__) || defined(__MK66FX1M0__)
+ // Teensy 3/3.1/LC
 #define GLCD_CORE_TEENSY3
 #else
 // For unknown Teensy boards, Fallback to using Arduino core code routines digitalWrite()/digitalRead()

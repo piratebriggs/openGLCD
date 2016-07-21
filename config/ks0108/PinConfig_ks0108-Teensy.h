@@ -2,7 +2,7 @@
  * ks0108_Teensy.h - User specific configuration for openGLCD library
  *
  * Use this file to set io pins
- * when using a Teensy, Teensy++, or Teensy3/3.1
+ * when using a Teensy, Teensy++, or Teensy3
  *
  * Note that each board uses different pin numbers 
  * so make sure that your wiring matches the device you are using
@@ -12,9 +12,56 @@
 #ifndef GLCD_PIN_CONFIG_H
 #define GLCD_PIN_CONFIG_H
 
-/**********************************************************/
-/*  Configuration for assigning LCD pins to Teensy++ Pins */
-/**********************************************************/
+/***********************************************************
+ *  Config for LCD pins to Teensy 3 boards                 *
+ * __MK20DX128__ for Teensy 3.0                            *
+ * __MK20DX256__ for Teensy 3.1                            *
+ * __MKL26Z64__  for Teensy LC                             *
+ * __MK64FX512__ for Teensy 3.4                            *
+ * __MK66FX1M0__ for Teensy 3.5                            *
+ ***********************************************************/
+#if defined(__MK20DX128__)   || defined(__MK20DX256__) || defined(__MKL26Z64__) || defined(__MK64FX512__) || defined(__MK66FX1M0__)
+
+#define glcd_PinConfigName "ks0108-Teensy3"   // define name for configuration
+
+// "default" Teensy 3 connections
+// used on GLCD demo board(s) for Bill Perry
+
+#define glcdPinData0      16
+#define glcdPinData1      17
+#define glcdPinData2      18 // i2c SDA0
+#define glcdPinData3      19 // i2c SCL0
+#define glcdPinData4      20
+#define glcdPinData5      21
+#define glcdPinData6      22
+#define glcdPinData7      23
+
+
+#define glcdPinDI          9
+#define glcdPinRW          8
+#define glcdPinEN          7
+#define glcdPinCSEL1       3
+#define glcdPinCSEL2       2
+#if NBR_CHIP_SELECT_PINS > 2
+#error Missing glcdPinCSEL3 define
+//#define glcdPinCSEL3    ?   // third chip select if needed
+#endif
+
+#if NBR_CHIP_SELECT_PINS > 3
+#error Missing glcdPinCSEL4 define
+//#define glcdPinCSEL4    ?   // fourth chip select if needed
+#endif
+
+//#define glcdPinBL          ?      //  optional backlight control pin controls BL circuit
+//#define glcdPinRES         ?      //  optional s/w reset control
+
+//#warning "KS0108 using pins for Teensy 3"
+
+
+/**********************************************************
+ *  Config for LCD pins to Teensy++ Pins                  *
+ **********************************************************/
+#elif defined(__AVR_AT90USB646__) || defined(__AVR_AT90USB1286__) // Teensy++ 2.0
 
 /*
  * Pins can be assigned using Arduino pin numbers 0-n
@@ -23,9 +70,6 @@
  *    Example: port D bit 3 is PIN_D3
  *
  */
-
- 
-#if defined(__AVR_AT90USB646__) || defined(__AVR_AT90USB1286__) // Teensy++ 2.0
 
 #define glcd_PinConfigName "ks0108-Teensy++"   // define name for configuration
 /*
@@ -62,50 +106,18 @@
 
 //#warning "KS0108 using pins for teensy++"
 
-/***********************************************************/
-/*  Configuration for LCD pins to Teensy 3.0/3.1/LC        */
-/***********************************************************/
-#elif defined(__MK20DX128__)   || defined(__MK20DX256__) || defined(__MKL26Z64__) // Teensy 3.0/Teensy 3.1/LC
-
-#define glcd_PinConfigName "ks0108-Teensy3"   // define name for configuration
-
-// "default" Teensy 3.0/3.1 connections
-// used on GLCD demo board for Bill Perry
-
-#define glcdPinData0      16
-#define glcdPinData1      17
-#define glcdPinData2      18 // i2c SDA0
-#define glcdPinData3      19 // i2c SCL0
-#define glcdPinData4      20
-#define glcdPinData5      21
-#define glcdPinData6      22
-#define glcdPinData7      23
-
-
-#define glcdPinDI          9
-#define glcdPinRW          8
-#define glcdPinEN          7
-#define glcdPinCSEL1       3
-#define glcdPinCSEL2       2
-#if NBR_CHIP_SELECT_PINS > 2
-#error Missing glcdPinCSEL3 define
-//#define glcdPinCSEL3    ?   // third chip select if needed
-#endif
-
-#if NBR_CHIP_SELECT_PINS > 3
-#error Missing glcdPinCSEL4 define
-//#define glcdPinCSEL4    ?   // fourth chip select if needed
-#endif
-
-//#define glcdPinBL          ?      //  optional backlight control pin controls BL circuit
-//#define glcdPinRES         ?      //  optional s/w reset control
-
-//#warning "KS0108 using pins for Teensy 3.0"
-
-/*********************************************************/
-/*  Configuration for assigning LCD pins to Teensy Pins  */
-/*********************************************************/
+/*********************************************************
+ *  Configuration for assigning LCD pins to Teensy Pins  *
+ *********************************************************/
 #elif defined(__AVR_ATmega32U4__)   // Teensy 2.0
+
+/*
+ * Pins can be assigned using Arduino pin numbers 0-n
+ * Pins on AVR devices can also be assigned using PIN_Pb 
+ *    where P is port A-L and b is bit 0-7
+ *    Example: port D bit 3 is PIN_D3
+ *
+ */
 
 #define glcd_PinConfigName "ks0108-Teensy"   // define name for configuration
 
