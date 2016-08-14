@@ -1611,7 +1611,18 @@ do										\
 
 #else
 
+/*
+ * ugliness to allow disabling PIN_An defines which collide
+ * with Arduino IDE 1.6.10 variant defines for analog pins.
+ * If AVRIO_DISABLE_PIN is defined then AVRIO_PORTA defines
+ * will not be created on chips that contain PORTA
+ *
+ * At some point things will be converted to use AVRPIN_Pb
+ * to avoid the collision all together.
+ */
 
+#if defined(PORTA)
+#if !defined(AVRIO_DISABLE_PIN_An)
 #define PIN_A0	AVRIO_PIN(AVRIO_PORTA, 0)
 #define PIN_A1	AVRIO_PIN(AVRIO_PORTA, 1)
 #define PIN_A2	AVRIO_PIN(AVRIO_PORTA, 2)
@@ -1620,6 +1631,10 @@ do										\
 #define PIN_A5	AVRIO_PIN(AVRIO_PORTA, 5)
 #define PIN_A6	AVRIO_PIN(AVRIO_PORTA, 6)
 #define PIN_A7	AVRIO_PIN(AVRIO_PORTA, 7)
+#else
+//#warning avrio has raw PIN_An defines disabled
+#endif
+#endif
 
 #define PIN_B0	AVRIO_PIN(AVRIO_PORTB, 0)
 #define PIN_B1	AVRIO_PIN(AVRIO_PORTB, 1)

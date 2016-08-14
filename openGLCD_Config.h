@@ -187,11 +187,21 @@
                                 // return an error.
 
 //#define GLCDCFG_FORCE_CORECODE // Forces library to use generic i/o routines rather than
-				// faster direct port i/o routines
-				// The config file used when in CORECODE mode is 
-				// config/{PANELNAME}/PinConfig_{PANELNAME}-CoreCode.h
-				// While much slower, this mode can be useful if there
-				// are direct port i/o mapping issues.
+                                 // faster direct port i/o routines
+                                 // The config file used when in CORECODE mode is 
+                                 // config/{PANELNAME}/PinConfig_{PANELNAME}-CoreCode.h
+                                 // While much slower, this mode can be useful if there
+                                 // are direct port i/o mapping issues.
+
+//#define GLCDCFG_SKETCH_AVIO_PIN_An // Override Arduino IDE 1.6.10 PIN_An defines with
+                                     // avrio PIN_An defines inside the sketch code.
+                                     // library config files will always use avrio PIN_An defines
+                                     // NOTE: this should not be necessary to enable as it
+                                     // relates to internal use of avrio which sketches normally
+                                     // do not use.
+                                     // Do NOT depend on this config option as it will soon
+                                     // disapear as avrio transitions to using AVRPIN_Pb
+                                     // notation instead of PIN_Pb notation.
 
 /*========================== End of Optional User Defines ==================================*/
 
