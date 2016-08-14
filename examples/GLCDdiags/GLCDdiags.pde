@@ -857,7 +857,7 @@ showGLCDconfig(void)
   Serial.print((ARDUINO%10000)/100);
   Serial.print('.');
   Serial.println((ARDUINO%10000)%100);
-#elif ARDUINO > 100 // 1.0.0 to 1.5.8 uses rev format #.#.#
+#elif ARDUINO >= 100 // 1.0.0 to 1.5.8 uses rev format #.#.#
   Serial.print(ARDUINO/100);
   Serial.print('.');
   Serial.print((ARDUINO%100)/10);
