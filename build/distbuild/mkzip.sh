@@ -1,4 +1,4 @@
-#################################################################
+################################################################
 # create openGLCD distribution zip image.
 #
 # This is a bash shell script to check out a openGLCD tree and build
@@ -191,7 +191,8 @@ VCSCHANGELOGFILE="$PROGWD/ChangeLog.txt"
 #   handles case of changing #.#.#foo to #.#.#-foo
 #
 #
-SEMVERSTR=$(echo $VCSBUILDSTR | sed -e 's/^\([^0-9]*\)\(.*\)/\2/' -e 's/^\([0-9][0-9]*\.[0-9][0-9]*\)\($\|[^\.].*\|\.[^0-9].*\)/\1.0\2/' -e 's/^\([0-9][0-9]*\.[0-9][0-9]*.[0-9][0-9]*\)\.\(.*\)/\1-\2/' -e 's/^\([0-9][0-9]*\.[0-9][0-9]*.[0-9][0-9]*\)\([^\+\-].*\)/\1-\2/')
+SEMVERSTR=$(echo $VCSBUILDSTR | sed -e 's/^\([^0-9]*\)\(.*\)/\2/' -e 's/^\([0-9][0-9]*\.[0-9][0-9]*\)\($\|[^\.].*\|\.[^0-9].*\)/\1.0\2/' -e 's/^\([0-9][0-9]*\.[0-9][0-9]*.[0-9][0-9]*\)\.\(.*\)/\1-\2/' -e 's/^\([0-9][0-9]*\.[0-9][0-9]*.[0-9][0-9]*\)\([^0-9+-].*\)/\1-\2/')
+
 
 #
 # zip command
@@ -357,6 +358,7 @@ echo paragraph=$GLCDLIBPROPPARAGRAPH >> "$GLCDLIBPROPFILE"
 echo category=$GLCDLIBPROPCATEGORY >> "$GLCDLIBPROPFILE"
 echo url=$GLCDLIBPROPURL >> "$GLCDLIBPROPFILE"
 echo architectures=$GLCDLIBPROPARCHITECTURES >> "$GLCDLIBPROPFILE"
+echo includes=$GLCDLIBNAME.h >> "$GLCDLIBPROPFILE"
 
 #
 # Must build doxygen docs before build directory is removed
