@@ -2403,6 +2403,12 @@ gText::CharHeight(uint8_t c)
 		if(!isNoPadFixedFont(this->Font))  // pixel padding?
 				height++;
 	}
+	/*
+	 * if(c) is to get around warning of not using 'c' parameter
+	 * optimizer should eliminate the code
+	 */
+	if(c) return height;
+
 	return height;
 }
 
