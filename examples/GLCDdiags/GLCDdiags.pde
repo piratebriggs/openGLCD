@@ -974,7 +974,14 @@ showGLCDconfig(void)
   SerialPrintQ(" E2:");
   SerialPrintPINstr(glcdPinE2);
 #endif
-
+#ifdef glcdPinE3
+  SerialPrintQ(" E3:");
+  SerialPrintPINstr(glcdPinE3);
+#endif
+#ifdef glcdPinE3
+  SerialPrintQ(" E4:");
+  SerialPrintPINstr(glcdPinE4);
+#endif
   Serial.println();
 
 //  SerialPrintf(" D0:%s", GLCDdiagsPIN2STR(glcdPinData0));

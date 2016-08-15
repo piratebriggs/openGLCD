@@ -392,6 +392,16 @@ int glcd_Device::Init(glcd_device_mode invert)
 	glcdio_WritePin(glcdPinE2,LOW); 	
 #endif
 
+#ifdef glcdPinE3
+	glcdio_PinMode(glcdPinE3,OUTPUT);	
+	glcdio_WritePin(glcdPinE3,LOW); 	
+#endif
+
+#ifdef glcdPinE4
+	glcdio_PinMode(glcdPinE4,OUTPUT);	
+	glcdio_WritePin(glcdPinE4,LOW); 	
+#endif
+
 #ifdef glcdPinEN
 	glcdio_PinMode(glcdPinEN,OUTPUT);	
 	glcdio_WritePin(glcdPinEN, LOW);
