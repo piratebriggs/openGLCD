@@ -57,6 +57,49 @@
 #include "pic32FastDigital.h" // definitions for digitalReadFAST()/digitalWriteFast()
 #endif
 
+/*
+ * Check to make sure all data pins are defined and none are duplicates.
+ */
+
+
+#if !defined(glcdPinData0) || !defined(glcdPinData1) || !defined(glcdPinData2) || !defined(glcdPinData3) || !defined(glcdPinData4) || !defined(glcdPinData5) || !defined(glcdPinData6) || !defined(glcdPinData7)
+#error not all gcdPinDataN data pins have been defined
+#endif
+
+#if (glcdPinData0 == glcdPinData1) || (glcdPinData0 == glcdPinData2) || (glcdPinData0 == glcdPinData3) || (glcdPinData0 == glcdPinData4) || (glcdPinData0 == glcdPinData5) || (glcdPinData0 == glcdPinData6) || (glcdPinData0 == glcdPinData7) 
+#error gcdPinData0 is a duplicate data pin
+#endif
+
+#if (glcdPinData1 == glcdPinData0) || (glcdPinData1 == glcdPinData2) || (glcdPinData1 == glcdPinData3) || (glcdPinData1 == glcdPinData4) || (glcdPinData1 == glcdPinData5) || (glcdPinData1 == glcdPinData6) || (glcdPinData1 == glcdPinData7) 
+#error gcdPinData1 is a duplicate data pin
+#endif
+
+#if (glcdPinData2 == glcdPinData0) || (glcdPinData2 == glcdPinData1) || (glcdPinData2 == glcdPinData3) || (glcdPinData2 == glcdPinData4) || (glcdPinData2 == glcdPinData5) || (glcdPinData2 == glcdPinData6) || (glcdPinData2 == glcdPinData7) 
+#error gcdPinData2 is a duplicate data pin
+#endif
+
+#if (glcdPinData3 == glcdPinData0) || (glcdPinData3 == glcdPinData1) || (glcdPinData3 == glcdPinData2) || (glcdPinData3 == glcdPinData4) || (glcdPinData3 == glcdPinData5) || (glcdPinData3 == glcdPinData6) || (glcdPinData3 == glcdPinData7) 
+#error gcdPinData3 is a duplicate data pin
+#endif
+
+
+#if (glcdPinData4 == glcdPinData0) || (glcdPinData4 == glcdPinData1) || (glcdPinData4 == glcdPinData2) || (glcdPinData4 == glcdPinData3) || (glcdPinData4 == glcdPinData5) || (glcdPinData4 == glcdPinData6) || (glcdPinData4 == glcdPinData7) 
+#error gcdPinData4 is a duplicate data pin
+#endif
+
+
+#if (glcdPinData5 == glcdPinData0) || (glcdPinData5 == glcdPinData1) || (glcdPinData5 == glcdPinData2) || (glcdPinData5 == glcdPinData3) || (glcdPinData5 == glcdPinData4) || (glcdPinData5 == glcdPinData6) || (glcdPinData5 == glcdPinData7) 
+#error gcdPinData5 is a duplicate data pin
+#endif
+
+#if (glcdPinData6 == glcdPinData0) || (glcdPinData6 == glcdPinData1) || (glcdPinData6 == glcdPinData2) || (glcdPinData6 == glcdPinData3) || (glcdPinData6 == glcdPinData4) || (glcdPinData6 == glcdPinData5) || (glcdPinData6 == glcdPinData7) 
+#error gcdPinData6 is a duplicate data pin
+#endif
+
+#if (glcdPinData7 == glcdPinData0) || (glcdPinData7 == glcdPinData1) || (glcdPinData7 == glcdPinData2) || (glcdPinData7 == glcdPinData3) || (glcdPinData7 == glcdPinData4) || (glcdPinData7 == glcdPinData5) || (glcdPinData7 == glcdPinData6) 
+#error gcdPinData7 is a duplicate data pin
+#endif
+
  
 /*
  * Map a glcd status bit to a pin.
