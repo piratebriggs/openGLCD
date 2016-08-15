@@ -1,12 +1,167 @@
 vi:ts=4
 
+---------------------------------------------------------------------------
+include tree:
+
+openGLCD.h
+	#include <include/glcd_types.h>
+	#include <include/glcd.h>
+	#include <include/glcd_errno.h>
+	#include <openGLCD_Buildinfo.h>
+
+include/glcd.h
+	#include <inttypes.h>
+	#include "openGLCD_Config.h"
+	#include "include/gText.h" 
+
+	needs:
+		gText class (it inherits)
+			- needs glcd_Device (it inherits)
+
+		glcd_device defines:
+			- PIXEL_OFF, PIXEL_ON
+
+		GLCDCFG_GLCDCONFIG panel defines
+			- DISPLAY_WIDTH
+			- DISPLAY_HEIGHT
+
+include/gText.h
+	#include <inttypes.h>
+	#include "WString.h"
+	#include "openGLCD_Config.h"
+	#include "include/glcd_types.h"
+	#include "include/glcd_Device.h"
+
+	gText class needs:
+		panel defines from GLCDCFG_GLCDCONFIG
+			- DISPLAY_WIDTH
+			- DISPLAY_HEIGHT
+		glcd_Device class (it inherits!!!!!)
+
+
+openGLCD_Config.h
+	no includes, only defines
+	defines GLCD_GLCDCONFIG
+
+GLCD_GLCDCONFIG panel config file (assuming auto-pin-config)
+	#include AutoPinConfig_XXX.h
+	#include "device/XXX_device.h>
+
+	needs:
+
+
+AutoPInConfig_XXX.h
+	no includes only defines
+
+device/XXX_device.h
+
+	needs:
+		all config pin defines (from GLCD_GLCDCONFIG and AutoPinConfig_XXX.h)
+		all macros from glcd_io.h
+
+
+include/glcd_Device.h
+	#include "openGLCD_Config.h"
+	#include "include/glcd_types.h"
+	#include "include/glcd_io.h"
+
+	needs:
+		glcd_CHIP_COUNT (from panel files like GLCDCFG_GLCDCONFIG)
+
+include/glcd_io.h
+	#include "include/glcd_arduino_io.h"    // macros map arduino pins & set CORE defines
+	#include GLCDCFG_GLCDCONFIG				// include glcd panel config file
+	#include "include/avrio.h"         // these macros do AVR direct port io    
+
+include/glcd_arduino_io.h
+	#include "pins_arduino.h" // comes from Arduino core/variant 
+
+
+glcd.cpp
+	#include "include/glcd.h"
+
+gText.cpp
+	#include "include/gText.h"
+	#include "include/glcd_errno.h"
+
+glcd_Device.cpp
+	#include "include/glcd_Device.h"
+	#include "include/glcd_errno.h"
+
+	needs macros from
+		- device/XXX_device.h
+		- glcd_io.h
+---------------------------------------------------------------------------
+Two ways to handle PIN_An issue starting in IDE 1.6.10
+Either put in ifdefs in multiple places to ensure that i/o macros like avrio
+are never included when openGLCD.h is included
+OR
+put ifdefs into glcd_arduino_io.h
+
+Both are VERY ugly hacks.
+
+The first one requires knowledge of this across multiple files:
+- glcd_Device.h
+
+#ifdef __openGLCD_H__
+#include GLCDCFG_GLCDCONFIG
+#else
+#include "include/glcd_io.h"
+#endif
+
+- avrio.h
+
+#undef PIN_A0
+#undef PIN_A1
+#undef PIN_A2
+#undef PIN_A3
+#undef PIN_A4
+#undef PIN_A5
+#undef PIN_A6
+#undef PIN_A7
+
+
+- every single panel file
+
+#ifndef __openGLCD_H__
+#include "AutoPinConfig_ks0108.h" 
+#include "device/ks0108_Device.h"
+#endif
+
+- GLCDdiags.pde (really ugly as it has to play many games to trick includes)
+
+#define GLCD_H
+#include <openGLCD.h>
+#undef __openGLCD_H__
+#undef GLCD_H
+#include <include/glcd.h>
+
+The 2nd one puts it all into glcd_arduino_io.h
+The really ugly part of this method is that the avrio macros
+are total crap for the PIN_A0 to PIN_A7 pins and won't work for the applications
+since the Arduino PIN_A0 to PIN_A7 values will be used inside the sketch.
+This will only affect sketches that attempt to use avrio raw port macros with the
+PIN_A0 to PIN_A7 pins.
+
+---------------------------------------------------------------------------
+
 1.0 release fixes:
+
+- add includes=openGLCD.h to library.properties
+(see new 1.5x library spec for IDE 1.6.10 release)
+
+- change over to using AVRPIN_Pb for raw AVR pins.
+The old PIN_Pb defines can be left in for backward compability but this will
+ensure no issues with the new Arduino 1.6.10 PIN_An defines.
+This has MASSIVE ripple effects since it affects:
+- all pin config files.
+- GLCDdiags output
+- documentation
+
+- consider inserting links to a static web hosting for documenation in all examples
 
 - fix the html/doxygen documenation for the GLCD control/glcd_device functions.
 For some reason in the newest doxygen, you don't automatically get the hyperlinks anymore.
-
-- update/remove googlcode references in the additional resources section.
-Specifically MCUIO and GLCDv3
 
 - add a way to read current row and col using GetAreaProp()
 This will not work correctly with proportional fonts.
@@ -608,3 +763,7 @@ architectures=avr
 
 - update diags to show glcd config defines.
 	All conig defines are reported
+
+- update/remove googlcode references in the additional resources section.
+Specifically MCUIO and GLCDv3
+

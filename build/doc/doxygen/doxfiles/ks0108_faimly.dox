@@ -261,7 +261,7 @@ Teensy 3.0 pin 3 is connected to the GLCD pin function CSEL1 (chip select 1) - <
 	<td><center> (no default)* </center></td> <!-- CSEL3 -->
 </tr>
 <tr>
-	<td><center> Teensy 3.0/3.1/LC</center></td>
+	<td><center> Teensy 3.0/3.1/LC/3.4/3.5</center></td>
 	<td><center> 9* </center></td> <!-- D_I -->
 	<td><center> 8* </center></td> <!-- R_W -->
 	<td><center> 7* </center></td> <!-- EN -->
@@ -363,6 +363,23 @@ Teensy 3.0 pin 3 is connected to the GLCD pin function CSEL1 (chip select 1) - <
 	<td><center> 3* </center></td> <!-- CSEL3 -->
 </tr>
 <tr>
+	<td><center> <b>CoreCode</b> Mode  </center></td>
+	<td><center> A3 </center></td> <!-- D_I -->
+	<td><center> A2 </center></td> <!-- R_W -->
+	<td><center> A4 </center></td> <!-- EN -->
+	<td><center> 8 </center></td> <!-- D0 -->
+	<td><center> 9 </center></td> <!-- D1 -->
+	<td><center> 10 </center></td> <!-- D2 -->
+	<td><center> 11 </center></td> <!-- D3 -->
+	<td><center> 4 </center></td> <!-- D4 -->
+	<td><center> 5 </center></td> <!-- D5 -->
+	<td><center> 6 </center></td> <!-- D6 -->
+	<td><center> 7 </center></td> <!-- D7 -->
+	<td><center> A0 </center></td> <!-- CSEL1 -->
+	<td><center> A1 </center></td> <!-- CSEL2 -->
+	<td><center> 3* </center></td> <!-- CSEL3 -->
+</tr>
+<tr>
 	<td><center> DUE\n(NOT SUPPORTED)</center></td>
 	<td><center> - </center></td> <!-- D_I -->
 	<td><center> - </center></td> <!-- R_W -->
@@ -387,9 +404,9 @@ Teensy 3.0 pin 3 is connected to the GLCD pin function CSEL1 (chip select 1) - <
 CSEL3 is only used on some 192x64 displays
 
 @warning
-<h2>Teensy 3.0 and Teensy LC pins must NEVER be connected directly to the GLCD module data pins.</h2>
+<h2>Teensy 3.0, 3.4 and Teensy LC pins must NEVER be connected directly to the GLCD module data pins.</h2>
 @warning
-This is because the GLCD is 5v while the Teensy 3.0 and LC are 3v and not 5v tolerant.
+This is because the GLCD is 5v while the Teensy 3.0/3.4/LC are 3v and not 5v tolerant.
 The voltages must be mapped using a voltage level shifter in order to avoid damaging the Teensy 3.0/LC.
 The voltage level shifter must be bi-directional on the 8 bit data lines.
 Alternatively, each connection from Teensy 3.0/LC to the GLCD can be protected
