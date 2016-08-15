@@ -79,7 +79,7 @@
 #endif
 
 #if defined(glcdPinE4) && (glcd_CHIP_COUNT != 4)
-#error "SED1520 glcdPinE3 defined but chip count is not 4"
+#error "SED1520 glcdPinE4 defined but chip count is not 4"
 #endif
 
 #if defined(glcdPinEN) && (!defined(glcd_CHIP0) || !defined(glcd_CHIP1))

@@ -109,29 +109,29 @@
 
 /*
  * Pins can be assigned using arduino pin numbers 0-n
- * Pins can also be assigned using PIN_Pb 
+ * Pins can also be assigned using 0xPb 
  *    where P is port A-L and b is bit 0-7
- *     Example: port D bit 3 is PIN_D3
+ *     Example: port D bit 3 is 0xD3
  *
  */
 
-#define glcdPinData0	PIN_A0
-#define glcdPinData1	PIN_A1
-#define glcdPinData2	PIN_A4
-#define glcdPinData3	PIN_A5
-#define glcdPinData4	PIN_A6
-#define glcdPinData5	PIN_A7
-#define glcdPinData6	PIN_A6
-#define glcdPinData7	PIN_A5
+#define glcdPinData0	0xA0
+#define glcdPinData1	0xA1
+#define glcdPinData2	0xA2
+#define glcdPinData3	0xA3
+#define glcdPinData4	0xA4
+#define glcdPinData5	0xA5
+#define glcdPinData6	0xA6
+#define glcdPinData7	0xA7
 
-#define glcdPinRW	PIN_C3
-#define glcdPinDI	PIN_C4
+#define glcdPinRW	0xC3
+#define glcdPinDI	0xC4
 
-#define glcdPinE1	PIN_C5
-#define glcdPinE2	PIN_C2
-#define glcdPinE3	PIN_C1
+#define glcdPinE1	0xC5
+#define glcdPinE2	0xC2
+#define glcdPinE3	0xC1
 
-#define glcdRES         PIN_C6
+#define glcdPinRES      0xC6
 
 //#define glcdPinBL	PIN_C7 // optional backlight control (requires additional circuitry)
 
