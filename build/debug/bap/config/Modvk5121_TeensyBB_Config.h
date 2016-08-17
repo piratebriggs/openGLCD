@@ -99,9 +99,9 @@
 
 /*
  * Pins can be assigned using arduino pin numbers 0-n
- * Pins can also be assigned using PIN_Pb 
+ * Pins can also be assigned using AVRPIN_Pb 
  *		where P is port A-L and b is bit 0-7
- *		Example: port D pin 3 is PIN_D3
+ *		Example: port D pin 3 is AVRPIN_D3
  *
  */
 
@@ -116,34 +116,33 @@
  * for the Teensy v2 minimimal pins "arduino" breadboard project
  */
 
-#define glcdPinData0	PIN_F0
-#define glcdPinData1	PIN_F1
-#define glcdPinData2	PIN_F4
-#define glcdPinData3	PIN_F5
-#define glcdPinData4	PIN_F6
-#define glcdPinData5	PIN_F7
-#define glcdPinData6	PIN_B6
-#define glcdPinData7	PIN_B5
+#define glcdPinData0	AVRPIN_F0
+#define glcdPinData1	AVRPIN_F1
+#define glcdPinData2	AVRPIN_F4
+#define glcdPinData3	AVRPIN_F5
+#define glcdPinData4	AVRPIN_F6
+#define glcdPinData5	AVRPIN_F7
+#define glcdPinData6	AVRPIN_B6
+#define glcdPinData7	AVRPIN_B5
 
-#define glcdPinRW	PIN_B4
+#define glcdPinRW	AVRPIN_B4
 
-#define glcdPinE1	PIN_D7
+#define glcdPinE1	AVRPIN_D7
 
-#define glcdPinDI	PIN_D6
+#define glcdPinDI	AVRPIN_D6
 
-#define glcdPinE2	PIN_C7
+#define glcdPinE2	AVRPIN_C7
 
-#define glcdPinBL	PIN_C6
+#define glcdPinBL	AVRPIN_C6
 
 #endif
 
-/*
- * Define for Backlight Control
- */
-//                    BLpin    on   off
-#define glcd_BLctl glcdPinBL, HIGH, LOW
+/*********************************************************/
+/*   Backlight Active Level Configuration                */
+/*   Defines level on glcdPinBL pin to turn on backlight */
+/*********************************************************/
 
-
+#define glcd_BLactlevel HIGH
 
 // defines for panel specific timing 
 #define GLCD_tDDR	290	/* tACC6: Data Delay time (E high to valid read data) 			*/

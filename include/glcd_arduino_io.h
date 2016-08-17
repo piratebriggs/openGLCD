@@ -40,51 +40,6 @@ extern "C" {
 }
 #endif
 
-// ugliness because 1.6.10 defined PIN_An names for analog pins
-// these names collide with avrio PIN_A0 to PIN_A7 defines
-// unless GLCDCFG_SKETCH_AVRIO_PIN_An is set, code that includes <openGLCD.h>
-// will use the Arduino PIN_An defines if:
-// - not using corecode (core code does not use raw port i/o)
-// - on AVR boards
-// - PORTA exists
-// - not a Teensy core (Teensy core PIN_An defines are ok to use, they are special)
-// - PIN_A0 exists (means pins_arduino.h file defined them)
-//
-// Very soon there will be a transition to AVRPIN_Pb notation in avrio so
-// some of this will simplify depending on backward compatibilty with PIN_Pb
-//
-
-#if !defined(GLCDCFG_FORCE_CORECODE) // force core code mode?, yes? no issues
-#if defined(__AVR__)
-#if defined(PORTA)
-#if !defined(CORE_TEENSY)
-
-#if defined(__openGLCD_H__) && defined(PIN_A0) && !defined(GLCDCFG_SKETCH_AVRIO_PIN_An)
-//#warning openGLCD and PIN_A0 defined disabling PIN_An pins in avrio
-#define AVRIO_DISABLE_PIN_An
-#else
-#if defined(__openGLCD_H__) && defined(PIN_A0) && defined(GLCDCFG_SKETCH_AVRIO_PIN_An)
-#warning Overriding (sketch) Arduino PIN_An defines with avrio PIN_An defines
-#endif
-//#warning undefine Arduino Arduino PIN_A0 to PIN_A7
-#undef PIN_A0
-#undef PIN_A1
-#undef PIN_A2
-#undef PIN_A3
-#undef PIN_A4
-#undef PIN_A5
-#undef PIN_A6
-#undef PIN_A7
-#endif
-
-#endif
-#endif
-
-#endif // !defined(CORE_TEENSY)
-#endif // !defined(GLCDCFG_FORCE_CORECODE)
-
-
-
 /*
  * Figure which Arduino core we are using
  */

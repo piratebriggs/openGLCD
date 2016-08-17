@@ -11,10 +11,10 @@ Pin Configuration:ks0108-Arduino
 --------------------------------------------------------------------
 GLCD:ks0108 DisplayWidth:128 DisplayHeight:64
 Chips:2 ChipWidth:64 ChipHeight:64
- CSEL1:A0(PIN_C0) CSEL2:A1(PIN_C1)
- RW:A2(PIN_C2) DI:A3(PIN_C3) EN:A4(PIN_C4)
- D0:8(PIN_B0) D1:9(PIN_B1) D2:10(PIN_B2) D3:11(PIN_B3)
- D4:4(PIN_D4) D5:5(PIN_D5) D6:6(PIN_D6) D7:7(PIN_D7)
+ CSEL1:A0(AVRPIN_C0) CSEL2:A1(AVRPIN_C1)
+ RW:A2(AVRPIN_C2) DI:A3(AVRPIN_C3) EN:A4(AVRPIN_C4)
+ D0:8(AVRPIN_B0) D1:9(AVRPIN_B1) D2:10(AVRPIN_B2) D3:11(AVRPIN_B3)
+ D4:4(AVRPIN_D4) D5:5(AVRPIN_D5) D6:6(AVRPIN_D6) D7:7(AVRPIN_D7)
 Delays: tDDR:320 tAS:140 tDSW:200 tWH:450 tWL:450
 ChipSelects: CHIP0:(A0,0x1, A1,0x0) CHIP1:(A0,0x0, A1,0x1)
 Data mode: 

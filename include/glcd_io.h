@@ -489,21 +489,15 @@ do{	glcdio_ChipSelect1(p1,v1);\
 
 /*
  * macros for backlight control
- * These work with the glcd_BLctl define in the panel files
- * NOTE: if the backlight control is backwards, do not modify
- * glcdio_BLon() and glcdio_BLoff() below, fix the levels in the config file
- * in the glcd_BLctl define.
+ * These work with the glcdPinBL and glcd_BLactlevel defines in the panel files
+ * NOTE: do not modify glcdio_BLon() and glcdio_BLoff() below to alter the backlight
+ * active level, fix the glcd_BLactlevel in the config file
  */
 
-#define _glcdio_BLstate(pin, onlevel, offlevel, state)\
- do { state ?  glcdio_WritePin(pin, onlevel) : glcdio_WritePin(pin, offlevel) ; } while(0)
-
-#define glcdio_BLstate(blctlstr, state) _glcdio_BLstate(blctlstr, state)
-
 #define glcdio_BLon() \
-	glcdio_BLstate(glcd_BLctl, 1)
+ do { glcd_BLactlevel ?  glcdio_WritePin(glcdPinBL, 1) : glcdio_WritePin(glcdPinBL, 0) ; } while(0)
 
 #define glcdio_BLoff() \
-	glcdio_BLstate(glcd_BLctl, 0)
+ do { glcd_BLactlevel ?  glcdio_WritePin(glcdPinBL, 0) : glcdio_WritePin(glcdPinBL, 1) ; } while(0)
 
 #endif // GLCD_IO_H

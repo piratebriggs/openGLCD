@@ -106,9 +106,9 @@
 
 /*
  * Pins can be assigned using arduino pin numbers 0-n
- * Pins can also be assigned using PIN_Pb 
+ * Pins can also be assigned using AVRPIN_Pb 
  *		where P is port A-L and b is bit 0-7
- *		Example: port D pin 3 is PIN_D3
+ *		Example: port D pin 3 is AVRPIN_D3
  *
  */
 
@@ -128,27 +128,27 @@
 
 #define glcd_ConfigName "Bills-BB128-v2Teensy++-BGMicro"
 
-#define glcdPinDI		PIN_D7
-#define glcdPinRW		PIN_E0
-#define glcdPinEN		PIN_E1
+#define glcdPinDI		AVRPIN_D7
+#define glcdPinRW		AVRPIN_E0
+#define glcdPinEN		AVRPIN_E1
 
-#define glcdPinData0		PIN_C0
-#define glcdPinData1		PIN_C1
-#define glcdPinData2		PIN_C2
-#define glcdPinData3		PIN_C3
-#define glcdPinData4		PIN_C4
-#define glcdPinData5		PIN_C5
-#define glcdPinData6		PIN_C6
-#define glcdPinData7		PIN_C7
+#define glcdPinData0		AVRPIN_C0
+#define glcdPinData1		AVRPIN_C1
+#define glcdPinData2		AVRPIN_C2
+#define glcdPinData3		AVRPIN_C3
+#define glcdPinData4		AVRPIN_C4
+#define glcdPinData5		AVRPIN_C5
+#define glcdPinData6		AVRPIN_C6
+#define glcdPinData7		AVRPIN_C7
 
 // skipped F7 to share config with teensyV2 and avoid LED on V2
-#define glcdPinCSEL3		    PIN_F6
-#define glcdPinCSEL4		    PIN_F5
+#define glcdPinCSEL3		    AVRPIN_F6
+#define glcdPinCSEL4		    AVRPIN_F5
 
-#define glcdPinRES 		    PIN_F4
+#define glcdPinRES 		    AVRPIN_F4
 
-#define glcdPinCSEL1		    PIN_F3
-#define glcdPinCSEL2		    PIN_F2
+#define glcdPinCSEL1		    AVRPIN_F3
+#define glcdPinCSEL2		    AVRPIN_F2
 
 #endif //v2 teensy++ 
 
@@ -159,32 +159,32 @@
 
 #define glcd_ConfigName "Bills-BB-v2Teensy-BGMicro"
 
-#define glcdDI			    PIN_B0
-#define glcdRW			    PIN_B1
-#define glcdEN			    PIN_B2
+#define glcdDI			    AVRPIN_B0
+#define glcdRW			    AVRPIN_B1
+#define glcdEN			    AVRPIN_B2
 
-#define glcdData0Pin		PIN_B3
-#define glcdData1Pin		PIN_B7
-#define glcdData2Pin		PIN_D0
-#define glcdData3Pin		PIN_D1
-#define glcdData4Pin		PIN_D2
-#define glcdData5Pin		PIN_D3
-#define glcdData6Pin		PIN_C6
-#define glcdData7Pin		PIN_C7
+#define glcdData0Pin		AVRPIN_B3
+#define glcdData1Pin		AVRPIN_B7
+#define glcdData2Pin		AVRPIN_D0
+#define glcdData3Pin		AVRPIN_D1
+#define glcdData4Pin		AVRPIN_D2
+#define glcdData5Pin		AVRPIN_D3
+#define glcdData6Pin		AVRPIN_C6
+#define glcdData7Pin		AVRPIN_C7
 
 // skipped D6 to avoid LED
-//#define glcdPinCSEL1		    PIN_D7
-//#define glcdPinCSEL2		    PIN_B4
-//#define glcdPinCSEL3		    PIN_B6
-//#define glcdPinCSEL4		    PIN_F7
+//#define glcdPinCSEL1		    AVRPIN_D7
+//#define glcdPinCSEL2		    AVRPIN_B4
+//#define glcdPinCSEL3		    AVRPIN_B6
+//#define glcdPinCSEL4		    AVRPIN_F7
 
-#define glcdPinCSEL1		    PIN_B6
-#define glcdPinCSEL2		    PIN_F7
-#define glcdPinCSEL3		    PIN_D7
-#define glcdPinCSEL4		    PIN_B4
+#define glcdPinCSEL1		    AVRPIN_B6
+#define glcdPinCSEL2		    AVRPIN_F7
+#define glcdPinCSEL3		    AVRPIN_D7
+#define glcdPinCSEL4		    AVRPIN_B4
 
 
-#define glcdRES 		    PIN_B5
+#define glcdRES 		    AVRPIN_B5
 
 #endif // teensy v2
 

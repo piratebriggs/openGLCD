@@ -54,7 +54,6 @@
  */
 
 #include <openGLCD.h>
-#include "include/glcd_io.h" // normal sketches don't need this.
 #include "include/glcd_errno.h"
 #include "include/glcd_delay.h" // normal sketches don't need this.
 
@@ -98,6 +97,7 @@
 #define MAX_ERRORS 10 // maximum errors per indivual test
 
 #ifdef _AVRIO_AVRIO_
+int avrpin2arduinopin(avrpin_t avriopin);
 void _SerialPrintPINstr(avrpin_t pin, const char *pinstr, uint8_t avrport,
 	 uint8_t avrbit);
 
@@ -155,8 +155,7 @@ P(GLCDlibBuild) = GLCD_GLCDLIB_BUILD_BUILDSTR;
  *
  */
 
-void
-SerialPrintP(PGM_P str )
+void SerialPrintP(PGM_P str )
 {
   char c;
   PGM_P p = str;
@@ -1155,9 +1154,11 @@ showGLCDconfig(void)
   SerialPrintQ("Backlight: ");
 #ifdef glcdPinBL
   SerialPrintPINstr(glcdPinBL);
-  SerialPrintQ(" BLctl:(");
-  SerialPrintQ(xstr(glcd_BLctl));
-  SerialPrintQ(")");
+  SerialPrintQ(" ActiveLevel: ");
+  if(glcd_BLactlevel)
+	SerialPrintQ("HIGH");
+  else
+	SerialPrintQ("LOW");
 #else
   SerialPrintQ("<Not configured>");
 #endif
@@ -1226,14 +1227,28 @@ showGLCDconfig(void)
 }
 
 #ifdef _AVRIO_AVRIO_
+// figure out arduino pin from raw pin info
+
+int avrpin2arduinopin(avrpin_t avriopin)
+{
+
+	for(int pin = 0; pin < NUM_DIGITAL_PINS; pin++)
+	{
+		if(AVRIO_PIN2AVRPIN(pin) == avriopin)
+			return(pin);
+	}
+
+	return(0); // this should never happen
+}
+
+
 /*
  * The avrio version of the pin string also contain
  * the AVR port and bit number of the pin.
- * The format is PIN_Pb where P is the port A-Z 
+ * The format is AVRPIN_Pb where P is the port A-Z 
  * and b is the bit number within the port 0-7
  */
-void
-_SerialPrintPINstr(avrpin_t pin, const char *pinstr, uint8_t avrport, uint8_t avrbit)
+void _SerialPrintPINstr(avrpin_t pin, const char *pinstr, uint8_t avrport, uint8_t avrbit)
 {
 
   /*
@@ -1242,13 +1257,9 @@ _SerialPrintPINstr(avrpin_t pin, const char *pinstr, uint8_t avrport, uint8_t av
    */
   if(pin >= AVRIO_PIN(AVRIO_PORTA, 0))
   {
-    
 //  SerialPrintf("0x%x", pin);
-    /*
-     * print pin value in hex when AVRPIN #s are used
-     */
-    SerialPrintQ("0x");
-    Serial.print(pin,HEX);
+
+	Serial.print(avrpin2arduinopin(pin));
   }
   else
   {
@@ -1256,17 +1267,16 @@ _SerialPrintPINstr(avrpin_t pin, const char *pinstr, uint8_t avrport, uint8_t av
     Serial.print(pinstr);
   }
 
-//SerialPrintf("(PIN_%c%d)", pin, 'A'-AVRIO_PORTA+avrport, avrbit);
+//SerialPrintf("(AVRPIN_%c%d)", pin, 'A'-AVRIO_PORTA+avrport, avrbit);
 
-  SerialPrintQ("(PIN_");
+  SerialPrintQ("(PORT");
   Serial.print((char)('A' - AVRIO_PORTA+avrport));
   Serial.print((int)avrbit);
   Serial.print(')');
 
 }
 #else
-void
-_SerialPrintPINstr(const char *pinstr)
+void _SerialPrintPINstr(const char *pinstr)
 {
   Serial.print(pinstr);
 }
@@ -1279,46 +1289,44 @@ _SerialPrintPINstr(const char *pinstr)
  * i.e. return value is 1/10 the number of SetDot() calls
  * per second.
  */
-uint16_t
-getglcdspeed()
+uint16_t getglcdspeed()
 {
 uint16_t iter = 0;
 unsigned long startmillis;
 
-  startmillis = millis();
+	  startmillis = millis();
 
-  while(millis() - startmillis < 1000) // loop for 1 second
-  {
-    /*
-     * Do 10 operations to minimize the effects of the millis() call
-     * and the loop.
-     *
-     * Note: The pixel locations were chosen to ensure that a
-     * a set colum and set page operation are needed for each SetDot()
-     * call.
-     * The intent is to get an overall feel for the speed of the GLD
-     * as each SetDot() call will do these operations to the glcd:
-     * - set page
-     * - set column
-     * - read byte (dummy read)
-     * - read byte (real read)
-     * - set column (set column back for write)
-     * - write byte
-     */
+	  while(millis() - startmillis < 1000) // loop for 1 second
+	  {
+	    /*
+	     * Do 10 operations to minimize the effects of the millis() call
+	     * and the loop.
+	     *
+	     * Note: The pixel locations were chosen to ensure that a
+	     * a set colum and set page operation are needed for each SetDot()
+	     * call.
+	     * The intent is to get an overall feel for the speed of the GLD
+	     * as each SetDot() call will do these operations to the glcd:
+	     * - set page
+	     * - set column
+	     * - read byte (dummy read)
+	     * - read byte (real read)
+	     * - set column (set column back for write)
+	     * - write byte
+	     */
 
-    GLCD.SetDot(GLCD.Right, GLCD.Bottom, WHITE);
-    GLCD.SetDot(GLCD.Right-1, GLCD.Bottom-9, WHITE);
-    GLCD.SetDot(GLCD.Right, GLCD.Bottom, WHITE);
-    GLCD.SetDot(GLCD.Right-1, GLCD.Bottom-9, WHITE);
-    GLCD.SetDot(GLCD.Right, GLCD.Bottom, WHITE);
-    GLCD.SetDot(GLCD.Right-1, GLCD.Bottom-9, WHITE);
-    GLCD.SetDot(GLCD.Right, GLCD.Bottom, WHITE);
-    GLCD.SetDot(GLCD.Right-1, GLCD.Bottom-9, WHITE);
-    GLCD.SetDot(GLCD.Right, GLCD.Bottom, WHITE);
-    GLCD.SetDot(GLCD.Right-1, GLCD.Bottom-9, WHITE);
-    iter++;
-  }
+	    GLCD.SetDot(GLCD.Right, GLCD.Bottom, WHITE);
+	    GLCD.SetDot(GLCD.Right-1, GLCD.Bottom-9, WHITE);
+	    GLCD.SetDot(GLCD.Right, GLCD.Bottom, WHITE);
+	    GLCD.SetDot(GLCD.Right-1, GLCD.Bottom-9, WHITE);
+	    GLCD.SetDot(GLCD.Right, GLCD.Bottom, WHITE);
+	    GLCD.SetDot(GLCD.Right-1, GLCD.Bottom-9, WHITE);
+	    GLCD.SetDot(GLCD.Right, GLCD.Bottom, WHITE);
+	    GLCD.SetDot(GLCD.Right-1, GLCD.Bottom-9, WHITE);
+	    GLCD.SetDot(GLCD.Right, GLCD.Bottom, WHITE);
+	    GLCD.SetDot(GLCD.Right-1, GLCD.Bottom-9, WHITE);
+	    iter++;
+	  }
 
-  return(iter);
-
+	  return(iter);
 }

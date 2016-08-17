@@ -80,12 +80,12 @@ The syntax used for specifying Arduino pin number is:
 #define glcdpinCSEL1	14 //example of using Arduino pin number
 @endcode
 
-The syntax used for AVR port and pin number is @em PIN_Pb where Pb represents a PORT and a bit#.\n
-For example, to specify port C bit 0 you would use PIN_C0
+The syntax used for AVR port and pin number is @em AVRPIN_Pb where Pb represents a PORT and a bit#.\n
+For example, to specify port C bit 0 you would use AVRPIN_C0
 The following sets glcdpinCSEL1 (the first chip select) to port C bit 0 which is the same
 as arduino digital pin 14 on a m328 processor.
 @code
-#define glcdpinCSEL1	PIN_C0 //example of using AVR Port and bit number
+#define glcdpinCSEL1	AVRPIN_C0 //example of using AVR Port and bit number
 @endcode
 
 There are no restristions as to which Arduino/AVR pins are used.

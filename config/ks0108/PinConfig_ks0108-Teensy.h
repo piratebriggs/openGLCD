@@ -65,33 +65,35 @@
 
 /*
  * Pins can be assigned using Arduino pin numbers 0-n
- * Pins on AVR devices can also be assigned using PIN_Pb 
+ * Pins on AVR devices can also be assigned using AVRPIN_Pb 
  *    where P is port A-L and b is bit 0-7
- *    Example: port D bit 3 is PIN_D3
+ *    Example: port D bit 3 is AVRPIN_D3
  *
+ * Pins on AVR devices can also be assigned using 0xPb for ports A to F
+ *     Example: port D bit 3 is 0xD3
  */
 
 #define glcd_PinConfigName "ks0108-Teensy++"   // define name for configuration
 /*
  *                Arduino pin    AVR pin
  */ 
-#define glcdPinData0    10      // PIN_C0
-#define glcdPinData1    11      // PIN_C1
-#define glcdPinData2    12      // PIN_C2
-#define glcdPinData3    13      // PIN_C3
-#define glcdPinData4    14      // PIN_C4
-#define glcdPinData5    15      // PIN_C5
-#define glcdPinData6    16      // PIN_C6
-#define glcdPinData7    17      // PIN_C7
+#define glcdPinData0    10      // AVRPIN_C0
+#define glcdPinData1    11      // AVRPIN_C1
+#define glcdPinData2    12      // AVRPIN_C2
+#define glcdPinData3    13      // AVRPIN_C3
+#define glcdPinData4    14      // AVRPIN_C4
+#define glcdPinData5    15      // AVRPIN_C5
+#define glcdPinData6    16      // AVRPIN_C6
+#define glcdPinData7    17      // AVRPIN_C7
 
-#define glcdPinDI       9       // PIN_E1
-#define glcdPinRW       8       // PIN_E0
-#define glcdPinEN       7       // PIN_D7
-#define glcdPinCSEL1    18      // PIN_E6 
-#define glcdPinCSEL2    19      // PIN_E7
+#define glcdPinDI       9       // AVRPIN_E1
+#define glcdPinRW       8       // AVRPIN_E0
+#define glcdPinEN       7       // AVRPIN_D7
+#define glcdPinCSEL1    18      // AVRPIN_E6 
+#define glcdPinCSEL2    19      // AVRPIN_E7
 
-//#define glcdPinBL       27      // PIN_B7     // optional backlight control pin controls BL circuit
-//#define glcdPinRES      5       // PIN_D5     // optional s/w reset control
+//#define glcdPinBL       27    // AVRPIN_B7     // optional backlight control pin controls BL circuit
+//#define glcdPinRES      5       // AVRPIN_D5     // optional s/w reset control
 
 #if NBR_CHIP_SELECT_PINS > 2
 #error Missing glcdPinCSEL3 define
@@ -113,10 +115,12 @@
 
 /*
  * Pins can be assigned using Arduino pin numbers 0-n
- * Pins on AVR devices can also be assigned using PIN_Pb 
+ * Pins on AVR devices can also be assigned using AVRPIN_Pb 
  *    where P is port A-L and b is bit 0-7
- *    Example: port D bit 3 is PIN_D3
+ *    Example: port D bit 3 is AVRPIN_D3
  *
+ * Pins on AVR devices can also be assigned using 0xPb for ports A to F
+ *     Example: port D bit 3 is 0xD3
  */
 
 #define glcd_PinConfigName "ks0108-Teensy"   // define name for configuration
@@ -124,23 +128,23 @@
 /*
  *                 Arduino pin    AVR pin
  */ 
-#define glcdPinData0    0        // PIN_B0
-#define glcdPinData1    1        // PIN_B1
-#define glcdPinData2    2        // PIN_B2
-#define glcdPinData3    3        // PIN_B3
-#define glcdPinData4    13       // PIN_B4
-#define glcdPinData5    14       // PIN_B5
-#define glcdPinData6    15       // PIN_B6
-#define glcdPinData7    4        // PIN_B7
+#define glcdPinData0    0        // AVRPIN_B0
+#define glcdPinData1    1        // AVRPIN_B1
+#define glcdPinData2    2        // AVRPIN_B2
+#define glcdPinData3    3        // AVRPIN_B3
+#define glcdPinData4    13       // AVRPIN_B4
+#define glcdPinData5    14       // AVRPIN_B5
+#define glcdPinData6    15       // AVRPIN_B6
+#define glcdPinData7    4        // AVRPIN_B7
 
-#define glcdPinDI       5        // PIN_D0 (i2c SCL)
-#define glcdPinRW       6        // PIN_D1 (i2c SDA)
-#define glcdPinEN       9        // PIN_C6
-#define glcdPinCSEL1    7        // PIN_D2    // normal connection for control signals
-#define glcdPinCSEL2    8        // PIN_D3
+#define glcdPinDI       5        // AVRPIN_D0 (i2c SCL)
+#define glcdPinRW       6        // AVRPIN_D1 (i2c SDA)
+#define glcdPinEN       9        // AVRPIN_C6
+#define glcdPinCSEL1    7        // AVRPIN_D2    // normal connection for control signals
+#define glcdPinCSEL2    8        // AVRPIN_D3
 
-//#define glcdPinBL       10       // PIN_C7    // optional backlight control pin controls BL circuit
-//#define glcdPinRES      17       // PIN_F6    // optional s/w Reset control
+//#define glcdPinBL       10       // AVRPIN_C7    // optional backlight control pin controls BL circuit
+//#define glcdPinRES      17       // AVRPIN_F6    // optional s/w Reset control
 
 #if NBR_CHIP_SELECT_PINS > 2
 #error Missing glcdPinCSEL3 define

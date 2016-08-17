@@ -103,9 +103,9 @@
 
 /*
  * Pins can be assigned using arduino pin numbers 0-n
- * Pins can also be assigned using PIN_Pb 
+ * Pins can also be assigned using AVRPIN_Pb 
  *		where P is port A-L and b is bit 0-7
- *		Example: port D pin 3 is PIN_D3
+ *		Example: port D pin 3 is AVRPIN_D3
  *
  */
 
@@ -118,22 +118,22 @@
  * for the Modern Device BBB "arduino" breadboard.project
  */
 
-#define glcdPinData0	PIN_B5
-#define glcdPinData1	PIN_B4
-#define glcdPinData2	PIN_B3
-#define glcdPinData3	PIN_B2
-#define glcdPinData4	PIN_B1
-#define glcdPinData5	PIN_B0
-#define glcdPinData6	PIN_D7
-#define glcdPinData7	PIN_D6
+#define glcdPinData0	AVRPIN_B5
+#define glcdPinData1	AVRPIN_B4
+#define glcdPinData2	AVRPIN_B3
+#define glcdPinData3	AVRPIN_B2
+#define glcdPinData4	AVRPIN_B1
+#define glcdPinData5	AVRPIN_B0
+#define glcdPinData6	AVRPIN_D7
+#define glcdPinData7	AVRPIN_D6
 
-#define glcdPinRW		PIN_D5
+#define glcdPinRW		AVRPIN_D5
 
-#define glcdPinE1		PIN_D4
+#define glcdPinE1		AVRPIN_D4
 
-#define glcdPinDI		PIN_D3	// A0 line
+#define glcdPinDI		AVRPIN_D3	// A0 line
 
-#define glcdPinE2		PIN_D2
+#define glcdPinE2		AVRPIN_D2
 
 #endif
 

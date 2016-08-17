@@ -43,20 +43,20 @@
 /*  Configuration for assigning LCD bits to Arduino Pins */
 /*********************************************************/
 
-#define glcdPinData0	PIN_B5
-#define glcdPinData1	PIN_B4
-#define glcdPinData2	PIN_B3
-#define glcdPinData3	PIN_B2
-#define glcdPinData4	PIN_B1
-#define glcdPinData5	PIN_B0
-#define glcdPinData6	PIN_D7
-#define glcdPinData7	PIN_D6
+#define glcdPinData0	AVRPIN_B5
+#define glcdPinData1	AVRPIN_B4
+#define glcdPinData2	AVRPIN_B3
+#define glcdPinData3	AVRPIN_B2
+#define glcdPinData4	AVRPIN_B1
+#define glcdPinData5	AVRPIN_B0
+#define glcdPinData6	AVRPIN_D7
+#define glcdPinData7	AVRPIN_D6
 
-#define glcdPinRW		PIN_D5	// RW_WR line
+#define glcdPinRW		AVRPIN_D5	// RW_WR line
 
-#define glcdPinEN		PIN_D4	// E_RD line
+#define glcdPinEN		AVRPIN_D4	// E_RD line
 
-#define glcdPinDI		PIN_D3	// RS line
+#define glcdPinDI		AVRPIN_D3	// RS line
 
 
 
