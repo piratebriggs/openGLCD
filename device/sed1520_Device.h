@@ -144,17 +144,6 @@
 #endif
 
 /*
- *	For now Assume only 2 chips
- *
- *	This assumption will also keep from doing a
- *	true modulo function to detect chip crossover
- *	as the chipwidth is not a power of two which
- *	means that masking cannot be used in place
- *  of real division.
- */
-
-
-/*
  * Check for single E line or seperate E lines.
  */
 #ifdef glcdPinEN // single enable
@@ -335,6 +324,32 @@ uint8_t _chip;						\
  */
 #ifndef GLCD_MT12232D_MODE
 // "normal" mode starts here
+
+/*
+ * Custom init routine to complete reset & re-init chip
+ * Note: this is initalizing the chip with its default
+ * powerup configuration. It can useful if the chip went
+ * hayware and re-initalization is being done without a
+ * power cycle.
+ */
+#define glcdDev_Init(chip)					\
+({												\
+uint8_t status;									\
+	do												\
+	{												\
+		WriteCommand(LCD_RESET, chip);				\
+		delay(5);									\
+		WriteCommand(LCD_STATICDRIVE_OFF, chip);	\
+		WriteCommand(LCD_DUTY_32, chip);			\
+		WriteCommand(LCD_ADC_RIGHTWARD, chip);	    \
+		WriteCommand(LCD_RMW_END, chip);			\
+		WriteCommand(LCD_DISP_START, chip);			\
+		WriteCommand(LCD_ON, chip);					\
+	}while(0);										\
+	status = GLCD_ENOERR;							\
+	status;	/* return value of macro */				\
+})
+
 
 #if (glcd_CHIP_COUNT == 2)
 #define glcdDev_Xval2ChipCol(x)		((x) < CHIP_WIDTH ? x : (x - CHIP_WIDTH))
