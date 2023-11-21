@@ -3,6 +3,72 @@
  *
  * Use this file to set io pins and LCD panel parameters
  *
+ *    This configuration file is for the display module from a Pure TheBug radio.
+ * 
+ *    This module uses 2 SED1520 chips each controlling one half of the 
+ *    display. There is a blue LED backlight, and you must provide a current
+ *    limiting resistor. It also contains an onboard contrast pot.
+ * 
+ *    The module also hosts 6 buttons that can be read using only 2 
+ *    additional pins. When any button is pressed, pin BIN is taken low.
+ *    To read which button(s) are depressed, make sure E1 & E2 are low and
+ *    that the data pins are in INPUT mode then set pin BOE to LOW and read the
+ *    data pins. Bits 0-6 indicate the button(s) pressed (LOW = pressed).
+ *    After reading data pins, set pin BOE to HIGH before continuing with sketch.
+ * 
+ *    This Display is very easy to hook up as it needs no additional components 
+ *    other than a current limiting resistor for the backlight.
+ * 
+ *    WARNING: pins BOE & BIN must be pulled high if buttons are not being used.
+ *
+ *    Left (Brown) socket (viewed from back of module)
+ *    +-------------------------------------------+
+ *    |Pin|Symbol|        Function                | Hook To
+ *    +-------------------------------------------+
+ *    | 1 | Vss  | Ground                         | Ground
+ *    +-------------------------------------------+
+ *    | 2 | Vdd  | +5v (?ma max)                  | +5v
+ *    +-------------------------------------------+
+ *    | 3 | A0/DI| H = Data, L=instruction/Status | glcdPinDI
+ *    +-------------------------------------------+
+ *    | 4 | RW   | H = Read, L = Write            | glcdPinRW
+ *    +-------------------------------------------+
+ *    | 5 | E1   | chip 0 enable strobe           | glcdPinE1
+ *    +-------------------------------------------+
+ *    | 6 | E2   | chip 1 enable strobe           | glcdPinE2
+ *    +-------------------------------------------+
+ *    | 7 | Unk  | +5v returned from the module?  | N/C
+ *    +-------------------------------------------+
+ *    | 8 | DB0  | Data Bit 0                     | glcdPinData0
+ *    +-------------------------------------------+
+ *    | 9 | DB1  | Data Bit 1                     | glcdPinData1
+ *    +-------------------------------------------+
+ *    |10 | Vss  | Ground                         | Ground
+ *    +-------------------------------------------+
+
+ *    Right (White) socket (viewed from back of module)
+ *    +-------------------------------------------+
+ *    | 1 | DB2  | Data Bit 2                     | glcdPinData2
+ *    +-------------------------------------------+
+ *    | 2 | DB3  | Data Bit 3                     | glcdPinData3
+ *    +-------------------------------------------+
+ *    | 3 | DB4  | Data Bit 4                     | glcdPinData4
+ *    +-------------------------------------------+
+ *    | 4 | DB5  | Data Bit 5                     | glcdPinData5
+ *    +-------------------------------------------+
+ *    | 5 | DB6  | Data Bit 6                     | glcdPinData6
+ *    +-------------------------------------------+
+ *    | 6 | DB7  | Data Bit 7                     | glcdPinData7
+ *    +-------------------------------------------+
+ *    | 7 | BLK  | Backlight LED Cathode          | Connect to GND through resistor
+ *    +-------------------------------------------+ (5v. Bright=50 Ohms, Med=100 Ohms, Low=1k Ohms)
+ *    | 8 | BOE  | Output enable for button latch | H=Latch in Hi-Z, L=output latch to data pins
+ *    +-------------------------------------------+ (Weak pull up if buttons not being read)
+ *    | 9 | BIN  | L = Button pressed             | Weak pull up. 
+ *    +-------------------------------------------+
+ *    |10 | Vss  | Ground                         | Ground
+ *    +-------------------------------------------+
+ *
  */
 
 #ifndef GLCD_PANEL_CONFIG_H
@@ -69,11 +135,11 @@
 #define glcdPinData6   33
 #define glcdPinData7   32
 
-#define glcdPinRW      17
-#define glcdPinDI      5    // Ao glcd pin
+#define glcdPinRW      16
+#define glcdPinDI      4    // Ao glcd pin
 
-#define glcdPinE1      16
-#define glcdPinE2      4
+#define glcdPinE1      18
+#define glcdPinE2      19
 
 #endif
 
