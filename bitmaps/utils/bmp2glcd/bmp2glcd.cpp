@@ -34,7 +34,7 @@
 
 #include <iostream>
 #include <fstream>
-#include "EasyBMP.h"
+#include "EasyBMP\EasyBMP.h"	// This is needed to keep pio happy
 #include <unistd.h>
 #include <stdlib.h>
 
