@@ -78,7 +78,7 @@
 
 
 // automatically configure library for a ks0108 128x64 panel
-#define GLCDCFG_GLCDCONFIG "config/ks0108/AutoConfig_ks0108-128x64_Panel.h"
+// #define GLCDCFG_GLCDCONFIG "config/ks0108/AutoConfig_ks0108-128x64_Panel.h"
 
 // automatically configure library for a ks0108 192x64 panel
 //#define GLCDCFG_GLCDCONFIG "config/ks0108/AutoConfig_ks0108-192x64_Panel.h"
@@ -131,6 +131,9 @@
 
 // generic sed1520 configuration (may required some amount of editing before using)
 //#define GLCDCFG_GLCDCONFIG "config/sed1520/ManualConfig_sed1520_Panel.h"
+
+// configuration for pt6520 based Pure TheBug 122x32 display with pinout diagram
+#define GLCDCFG_GLCDCONFIG "config/sed1520/ManualConfig_pt6520-BugDisplay_Panel.h"
 
 /*
  * For s/w development debugging
