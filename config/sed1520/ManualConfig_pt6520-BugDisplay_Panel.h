@@ -39,8 +39,9 @@
  * Pins on AVR devices can also be assigned using 0xPb for ports A to F
  *     Example: port D bit 3 is 0xD3
  */
+#define NBR_CHIP_SELECT_PINS 0 // fill in with how many chip selects
 
-
+#if defined(__AVR_ATmega2560__)
 #define glcdPinData0    8
 #define glcdPinData1    9
 #define glcdPinData2   10
@@ -53,40 +54,27 @@
 #define glcdPinRW      A4
 #define glcdPinDI      A5    // Ao glcd pin
 
-/*
- * modules may use 
- * - chip selects and 1 enable
- * - 2 enables and no chip selects
- * - 3 enables and no chip selects
- * - 4 enables and no chip selects
- *
- */
-
-#define NBR_CHIP_SELECT_PINS 2 // fill in with how many chip selects
-
-#if  NBR_CHIP_SELECT_PINS == 0
-
 #define glcdPinE1      A0
 #define glcdPinE2      A1
 
-#if (glcd_CHIP_COUNT > 2) // add a third enable for 3 chips
-#define glcdPinE2      A2
-
-#if (glcd_CHIP_COUNT > 3) // add a forth enabl for 4 chips
-#define glcdPinE3      A3
-
-#elif NBR_CHIP_SELECT_PINS == 2
-// dual chipselects so use dual chipselects and enable
-#define glcdPinCSEL1   A0
-#define glcdPinCSEL2   A1
-#define glcdPinEN      A2
-// chipselect definitions for each chip
-#define glcd_CHIP0 glcdPinCSEL1,LOW,   glcdPinCSEL2,HIGH
-#define glcd_CHIP1 glcdPinCSEL1,HIGH,  glcdPinCSEL2,LOW    
-
-
 #else
-#error unsupported number of chipselects
+// ESP32 Dev Kit
+
+#define glcdPinData0   13
+#define glcdPinData1   12
+#define glcdPinData2   14
+#define glcdPinData3   27
+#define glcdPinData4   26
+#define glcdPinData5   25
+#define glcdPinData6   33
+#define glcdPinData7   32
+
+#define glcdPinRW      17
+#define glcdPinDI      5    // Ao glcd pin
+
+#define glcdPinE1      16
+#define glcdPinE2      4
+
 #endif
 
 
