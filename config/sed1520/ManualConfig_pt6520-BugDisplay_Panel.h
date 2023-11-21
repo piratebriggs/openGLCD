@@ -138,8 +138,8 @@
 #define glcdPinRW      16
 #define glcdPinDI      4    // Ao glcd pin
 
-#define glcdPinE1      18
-#define glcdPinE2      19
+#define glcdPinE1      19
+#define glcdPinE2      18
 
 #endif
 
