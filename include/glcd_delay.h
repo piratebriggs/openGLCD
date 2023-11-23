@@ -51,10 +51,6 @@
 #include "delay_cycles_pic32.h"
 #define _delayNanoseconds(__ns)     _delay_cycles( (double)(F_CPU/2)*((double)__ns)/1.0e9 + 0.5 )
 
-#elif defined(ESP32) // for esp32 
-#include "delay_cycles_esp32.h"
-#define _delayNanoseconds(__ns)     _delay_cycles( (double)(F_CPU)*((double)__ns)/1.0e9 + 0.5 )
-
 #else
 #warning "No delay_cycle support for MCU"
 #endif
