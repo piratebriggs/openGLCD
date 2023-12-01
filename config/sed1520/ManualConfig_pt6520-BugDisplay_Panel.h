@@ -131,7 +131,7 @@
 #define glcdPinData2   14
 #define glcdPinData3   27
 #define glcdPinData4   26
-#define glcdPinData5   25
+#define glcdPinData5   15   // pin 25 freed up for audio experiments
 #define glcdPinData6   33
 #define glcdPinData7   32
 
