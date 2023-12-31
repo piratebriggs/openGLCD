@@ -104,10 +104,15 @@ void gpio_dirinA(uint8_t pullup)
     Wire.write(0xFF);                       // Write value
     Wire.endTransmission();
 
-    if(false) {
+    if(pullup) {
         Wire.beginTransmission(GPIOEXP_ADDR);
         Wire.write(GPPUA_REG);                // Select GPIOB
         Wire.write(0xff);                   // Write value
+        Wire.endTransmission();
+    } else {
+        Wire.beginTransmission(GPIOEXP_ADDR);
+        Wire.write(GPPUA_REG);                // Select GPIOB
+        Wire.write(0x00);                   // Write value
         Wire.endTransmission();
     }
 }
