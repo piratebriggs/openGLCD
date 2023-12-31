@@ -107,7 +107,7 @@
  */
 #define NBR_CHIP_SELECT_PINS 0 // fill in with how many chip selects
 
-#if defined(__AVR_ATmega2560__)
+#if false   // defined(__AVR_ATmega2560__)
 #define glcdPinData0    8
 #define glcdPinData1    9
 #define glcdPinData2   10
@@ -123,7 +123,7 @@
 #define glcdPinE1      A0
 #define glcdPinE2      A1
 
-#else
+#elif defined(ESP32_DevKit)
 // ESP32 Dev Kit
 
 #define glcdPinData0   13
@@ -140,6 +140,41 @@
 
 #define glcdPinE1      17
 #define glcdPinE2      5
+
+#else
+
+#define I2C_ADDR      0x20  // I2C module address (see datasheet)
+#define IODIRA_REG    0x00  // MCP23017 internal register IODIRA  (see datasheet)
+#define IODIRB_REG    0x01  // MCP23017 internal register IODIRB  (see datasheet)
+#define GPPUA_REG     0x0C  // MCP23017 internal register GPPUA  (see datasheet)
+#define GPPUB_REG     0x0D  // MCP23017 internal register GPPUB  (see datasheet)
+#define GPIOA_REG     0x12  // MCP23017 internal register GPIOA  (see datasheet)
+#define GPIOB_REG     0x13  // MCP23017 internal register GPIOB  (see datasheet)
+#define OLATA_REG     0x14  // MCP23017 internal register OLATA  (see datasheet)
+#define OLATB_REG     0x15  // MCP23017 internal register OLATB  (see datasheet)
+
+// GPIO A
+#define glcdPinData0   0
+#define glcdPinData1   1
+#define glcdPinData2   2
+#define glcdPinData3   3
+#define glcdPinData4   4
+#define glcdPinData5   5 
+#define glcdPinData6   6
+#define glcdPinData7   7
+
+// GPIO B
+#define glcdPinDI      0
+#define glcdPinRW      1
+
+#define glcdPinE1      2
+#define glcdPinE2      3
+
+#define glcdPinBOE     4
+#define glcdPinBIN     5
+
+#define glcdPinBL     6 // optional backlight control pin
+#define glcdPinBL2    7 // optional backlight control pin
 
 #endif
 
