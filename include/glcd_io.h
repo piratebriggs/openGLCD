@@ -49,7 +49,7 @@
 #define AVRIO_NO4BIT // for now disable nibble mode
 #endif
 
-#if defined(__AVR__) && !defined(GLCD_CORE_CORECODE) && !defined(I2C_ADDR)
+#if defined(__AVR__) && !defined(GLCD_CORE_CORECODE)
 #include "include/avrio.h"         // these macros do AVR direct port io    
 #endif
 
@@ -110,8 +110,11 @@
 #define xGLCD_STATUS_BIT2PIN(bit)    glcdPinData ## bit
 #define GLCD_STATUS_BIT2PIN(bit)    xGLCD_STATUS_BIT2PIN(bit)    
 
+#ifdef GLCDCFG_I2C
+#warning "Using I2C Mode"
+#include "include/glcd_io_i2c.h"
 
-#ifdef  _AVRIO_AVRIO_ // ================= Begin _AVRIO_AVRIO_ specific code =============================
+#elif defined(_AVRIO_AVRIO_) // ================= Begin _AVRIO_AVRIO_ specific code =============================
 
 
 #ifndef OUTPUT
@@ -201,20 +204,6 @@ do {									\
 #define GLCDIO_DIGITALXXXFAST  // indicate using digitalxxxFast() routines (used by diags)
 
 // default back to regular Arduino digital core io routines
-#elif defined(I2C_ADDR)
-#warning "Using I2C Mode"
-#include "include/gpio.h"
-
-#define glcdio_ReadPin(pin)				gpio_readpinA(pin)
-#define glcdio_WritePin(pin, pinval) 	gpio_writepinB(pin, pinval)
-#define glcdio_PinMode(pin, mode)
-#define glcdio_WriteByte(data)			gpio_writebyteA(data)
-#define glcdio_ReadByte()				gpio_readbyteA()
-
-#define glcdio_DataDirIn(_ENpullups)	gpio_dirinA(_ENpullups)
-#define glcdio_DataDirOut()				gpio_diroutA()
-
-
 #else
 #define glcdio_ReadPin(pin)				digitalRead(pin)
 #define glcdio_WritePin(pin, pinval)	digitalWrite(pin, pinval)
@@ -229,7 +218,6 @@ do {									\
  * if the value is non-zero rather than for HIGH.
  */
 
-#ifndef glcdio_WriteByte
 #define glcdio_WriteByte(data) 					\
 do {											\
 	glcdio_WritePin(glcdPinData0, data & _BV(0));	\
@@ -241,12 +229,11 @@ do {											\
 	glcdio_WritePin(glcdPinData6, data & _BV(6));	\
 	glcdio_WritePin(glcdPinData7, data & _BV(7));	\
 } while(0)
-#endif
+
 
 /*
  * Read the configured LCD data lines and return data as 8 bit byte
  */
-#ifndef glcdio_ReadByte
 #define glcdio_ReadByte() 								\
 ({													\
 	uint8_t rval = 0;										\
@@ -260,9 +247,8 @@ do {											\
 	if(glcdio_ReadPin(glcdPinData7)) rval |= _BV(7);	\
 	rval;	/* return value of macro */				\
 })
-#endif
 
-#ifndef glcdio_DataDirIn
+
 /*
  * Configure the direction of the data pins.
  * If the IDE/core does not support INPUT_PULLUP then
@@ -311,9 +297,7 @@ do {										\
 	glcdio_PinMode(glcdPinData7, INPUT);	\
 }while (0)
 #endif
-#endif
 
-#ifndef glcdio_DataDirOut
 #define glcdio_DataDirOut()				\
 do {									\
 	glcdio_PinMode(glcdPinData0, OUTPUT);	\
@@ -325,11 +309,10 @@ do {									\
 	glcdio_PinMode(glcdPinData6, OUTPUT);	\
 	glcdio_PinMode(glcdPinData7, OUTPUT);	\
 }while (0)
-#endif
 
-#endif
 
-// ================= End of non AVRIO stuff =============================
+#endif // ================= End of non AVRIO stuff =============================
+
 
 /*
  * alias to set RW and DI pins
