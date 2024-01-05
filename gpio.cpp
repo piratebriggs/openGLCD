@@ -88,6 +88,27 @@ uint8_t gpio_readpinA(uint8_t pin) {
     return (gpio_readbyteA() & _BV(pin));
 }
 
+uint8_t gpio_readbyteB() {
+
+    Wire.beginTransmission(GPIOEXP_ADDR);
+    Wire.write(GPIOB_REG);
+    Wire.endTransmission();
+    // Read GPIOB
+    Wire.requestFrom(GPIOEXP_ADDR, 1);
+	while ( Wire.available()<1 )
+        Serial.println("Wire not available");
+    uint8_t result = Wire.read();
+    return result;
+}
+
+/// @brief Read pin from GPIOB
+/// @param pin 
+/// @return 
+uint8_t gpio_readpinB(uint8_t pin) {
+    return (gpio_readbyteB() & _BV(pin));
+}
+
+
 void gpio_dirinA(uint8_t pullup)
 {
     porta_dir = 0xFF;

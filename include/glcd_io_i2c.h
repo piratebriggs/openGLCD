@@ -36,6 +36,9 @@ uint8_t gpio_readbyteA();
 /// @param pin 
 /// @return 
 uint8_t gpio_readpinA(uint8_t pin);
+
+uint8_t gpio_readpinB(uint8_t pin);
+
 void gpio_dirinA(uint8_t pullup);
 void gpio_diroutA();
 
