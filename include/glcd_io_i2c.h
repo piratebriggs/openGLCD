@@ -38,7 +38,6 @@ uint8_t gpio_readbyteA();
 uint8_t gpio_readpinA(uint8_t pin);
 void gpio_dirinA(uint8_t pullup);
 void gpio_diroutA();
-void glcdio_i2c_init();
 
 #define glcdio_ReadPin(pin)				gpio_readpinA(pin)
 #define glcdio_WritePin(pin, pinval) 	gpio_writepinB(pin, pinval)

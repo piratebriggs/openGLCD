@@ -118,8 +118,3 @@ void gpio_diroutA()
     Wire.write(0x00);                       // Write value
     Wire.endTransmission();
 }
-
-void glcdio_i2c_init()
-{
-    // Wire.begin();
-}
